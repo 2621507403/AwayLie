@@ -2,7 +2,11 @@ package com.example.awaylie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +18,14 @@ import android.widget.TextView;
 
 import com.example.awaylie.bean.WeatherBean;
 import com.example.awaylie.controller.WeatherController;
+import com.example.awaylie.fragments.HomePagerFragment;
+import com.example.awaylie.fragments.MessageFragment;
+import com.example.awaylie.fragments.MineFragment;
+import com.example.awaylie.fragments.ReleaseFragment;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +35,110 @@ import java.util.List;
      * */
 public class MainActivity extends AppCompatActivity {
     private TextView topBarWeatherTV;
+    private ViewPager2 mainPagerVP2;
+    private TabLayout mainPagerTabLayout;
+    private List<Fragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         topBarWeatherTV = findViewById(R.id.main_Topbar_Weather);
-        //getWeather("合肥");//这里是用于更新界面天气情况
+        mainPagerVP2 = findViewById(R.id.main_pager_vp2);
+        mainPagerTabLayout = findViewById(R.id.main_pager_tabLayout);
+        initMainActivity();//对界面的初始化
     }
+
+    //初始化四个界面以及底部导航栏
+    private void initMainActivity(){
+        fragments = new ArrayList<>();
+        fragments.add(new HomePagerFragment());
+        fragments.add(new ReleaseFragment());
+        fragments.add(new MessageFragment());
+        fragments.add(new MineFragment());
+
+        //对viewpager进行操作
+        mainPagerVP2.setAdapter(new FragmentStateAdapter(MainActivity.this) {
+            @NonNull
+            @Override
+            public Fragment createFragment(int position) {
+                return fragments.get(position);
+            }
+            @Override
+            public int getItemCount() {
+                return fragments.size();
+            }
+        });
+
+        new TabLayoutMediator(mainPagerTabLayout, mainPagerVP2, (tab, position) -> {//此处使用了lambda表达
+                switch (position){
+                    case 0:
+                        tab.setText("首页");
+                        tab.setIcon(R.mipmap.home);
+                        break;
+                    case 1:
+                        tab.setText("发布");
+                        tab.setIcon(R.mipmap.dynamic);
+                        break;
+                    case 2:
+                        tab.setText("消息");
+                        tab.setIcon(R.mipmap.message);
+                        break;
+                    case 3:
+                        tab.setText("我的");
+                        tab.setText("我的");tab.setIcon(R.mipmap.mine);
+                        break;
+                }
+        }).attach();
+
+        //设置选中时，图标的改变
+        mainPagerTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case  0:
+                        tab.setIcon(R.mipmap.home_select);
+                        break;
+                    case  1:
+                        tab.setIcon(R.mipmap.dynamic_select);
+                        break;
+                    case  2:
+                        tab.setIcon(R.mipmap.message_select);
+                        break;
+                    case  3:
+                        tab.setIcon(R.mipmap.mine_select);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case  0:
+                        tab.setIcon(R.mipmap.home);
+                        break;
+                    case  1:
+                        tab.setIcon(R.mipmap.dynamic);
+                        break;
+                    case  2:
+                        tab.setIcon(R.mipmap.message);
+                        break;
+                    case  3:
+                        tab.setIcon(R.mipmap.mine);
+                        break;
+                }
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        //设置进入界面时的显示页
+        mainPagerVP2.setCurrentItem(0);
+
+
+    }
+
 
     @Override
     protected void onStart() {

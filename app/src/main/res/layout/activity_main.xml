@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,42 @@
     android:orientation="vertical">
 
     <include
+        android:id="@+id/weatherBar"
         layout="@layout/activity_main_topbar"
         ></include>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_below="@id/weatherBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/main_pager_vp2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ></androidx.viewpager2.widget.ViewPager2>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            >
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/main_pager_tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#B5333533"
+                ></com.google.android.material.tabs.TabLayout>
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/release"></Button>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
