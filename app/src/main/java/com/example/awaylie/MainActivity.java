@@ -24,30 +24,28 @@ import java.util.List;
      * */
 public class MainActivity extends AppCompatActivity {
     private TextView topBarWeatherTV;
-    private String weatherText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         topBarWeatherTV = findViewById(R.id.main_Topbar_Weather);
-        //topBarWeatherTV.setText(getWeather("合肥"));
-        getWeather("合肥");
-        //Log.d("MainActivity", "onCreate: "+weatherText);
+        //getWeather("合肥");//这里是用于更新界面天气情况
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        topBarWeatherTV.setText(weatherText);
     }
 
     //这个函数用来获取到天气信息,位置信息从sharedPreference中获取，这里模拟一下
-    //这个函数用于给变量weatherText进行初始化操作
-    private String getWeather(String cityName){
+    //这个函数用于给变量weatherText进行初始化操作，同时能够给ui进行更新操作
+    private void getWeather(String cityName){
         //创建子线程，实现对天气的获取
         HandlerThread weatherThread = new HandlerThread("weatherThread");
         weatherThread.start();
         Handler handler = new Handler(weatherThread.getLooper()){
+            private String weatherText;
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
@@ -77,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 handler.sendMessage(m);
             }
         });
-        return weatherText;
     }
 
 }
