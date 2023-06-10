@@ -10,17 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal"
+        android:background="@color/grey"
         >
         <TextView
             android:text="天气:"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:textSize="16sp"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             ></TextView>
         <TextView
             android:id="@+id/main_Topbar_Weather"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             ></TextView>
 
