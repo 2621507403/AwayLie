@@ -7,4 +7,6 @@
     <color name="fab1_color">#E43AF37B</color>
     <color name="fab2_color">#CE3AF37B</color>
     <color name="fab3_color">#753AF37B</color>
+    <color name="grey_transparent">#39D2D2D2</color>
+
 </resources>

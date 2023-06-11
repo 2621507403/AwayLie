@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //在主线程中更新ui
-                        Log.d("MainActivity", "onCreate: "+weatherText);
+                        //Log.d("MainActivity", "onCreate: "+weatherText);
                         topBarWeatherTV.setText(weatherText);
                     }
                 });

@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <com.youth.banner.Banner
-        android:id="@+id/homePager_banner"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        ></com.youth.banner.Banner>
     <TextView
+        android:id="@+id/webTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="最新新闻"
-        android:textStyle="bold"
+        android:text="这是浏览器"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
         android:background="@color/white"
-        android:gravity="center_horizontal" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homePager_newsData"
+        ></TextView>
+    <WebView
+        android:id="@+id/webShow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></androidx.recyclerview.widget.RecyclerView>
-
+        ></WebView>
 
 </LinearLayout>
