@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mainPagerVP2 = findViewById(R.id.main_pager_vp2);
         mainPagerTabLayout = findViewById(R.id.main_pager_tabLayout);
         initMainActivity();//对界面的初始化
+        mainPagerVP2.setUserInputEnabled(false);
     }
 
     //初始化四个界面以及底部导航栏
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         tab.setText("首页");
-                        tab.setIcon(R.mipmap.home);
+                        tab.setIcon(R.mipmap.home_select);
                         break;
                     case 1:
                         tab.setText("发布");
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         tab.setText("我的");
-                        tab.setText("我的");tab.setIcon(R.mipmap.mine);
+                        tab.setIcon(R.mipmap.mine);
                         break;
                 }
         }).attach();
@@ -132,13 +133,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
         //设置进入界面时的显示页
         mainPagerVP2.setCurrentItem(0);
-
-
     }
-
 
     @Override
     protected void onStart() {
