@@ -3,8 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomePagerFragment">
+    android:orientation="vertical">
 
+    <com.youth.banner.Banner
+        android:id="@+id/homePager_banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        ></com.youth.banner.Banner>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>
