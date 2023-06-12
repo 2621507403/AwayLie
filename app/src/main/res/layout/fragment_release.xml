@@ -3,6 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/release_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            fab:tabTextColor="@color/black"
+            ></com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/release_viewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </androidx.viewpager2.widget.ViewPager2>
+
+
+    </LinearLayout>
+    
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/release_FAM"
         android:layout_width="60dp"
@@ -19,29 +42,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             fab:fab_showShadow="true"
+
             fab:fab_shadowColor="#66000000"
-            fab:fab_colorNormal="@color/fab1_color"
-            fab:fab_colorPressed="@color/transparent"
+            fab:fab_colorNormal="@color/transparent"
+            fab:fab_colorPressed="@color/grey_transparent"
+
             ></com.github.clans.fab.FloatingActionButton>
         <com.github.clans.fab.FloatingActionButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             fab:fab_showShadow="true"
             fab:fab_shadowColor="#66000000"
-            fab:fab_colorNormal="@color/fab2_color"
-            fab:fab_colorPressed="@color/transparent"
+            android:scaleType="centerInside"
+            fab:fab_colorNormal="@color/transparent"
+            fab:fab_colorPressed="@color/grey_transparent"
             ></com.github.clans.fab.FloatingActionButton>
-        <com.github.clans.fab.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            fab:fab_showShadow="true"
-            fab:fab_shadowColor="#66000000"
-            fab:fab_colorNormal="@color/fab3_color"
-            fab:fab_colorPressed="@color/transparent"
-            ></com.github.clans.fab.FloatingActionButton>
-
-
-
     </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>
