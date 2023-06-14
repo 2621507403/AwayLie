@@ -2,7 +2,9 @@ package com.example.awaylie.fragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -156,4 +158,29 @@ public class HomePagerFragment extends Fragment {
         titles.add("网络谣言曝光台");
         titles.add("打击整顿养老诈骗");
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 获取保存的浏览位置
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        int position = sharedPreferences.getInt("newsPosition", 0);
+        // 恢复浏览位置
+        LinearLayoutManager layoutManager = (LinearLayoutManager) newsDataRV.getLayoutManager();
+        layoutManager.scrollToPositionWithOffset(position, 0);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 获取当前浏览位置
+        LinearLayoutManager layoutManager = (LinearLayoutManager) newsDataRV.getLayoutManager();
+        int position = layoutManager.findFirstVisibleItemPosition();
+        // 保存当前浏览位置
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("newsPosition", position);
+        editor.apply();
+    }
+
 }

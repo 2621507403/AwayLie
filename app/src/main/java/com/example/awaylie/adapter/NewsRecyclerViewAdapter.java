@@ -39,6 +39,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     public NewsRecyclerViewAdapter(List<HomePagerNewsDataBean> homePagerNewsDataBean) {
         this.homePagerNewsDataBean = homePagerNewsDataBean;
     }
+
     //这个方法用于将item使用的layout布局与recyclerView相关联
     @NonNull
     @Override

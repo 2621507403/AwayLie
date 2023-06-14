@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.releaseFragments.VerifyFragment">
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <ImageView
+        android:src="@drawable/vertify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ImageView>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
 
-</FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/release_verify_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+        <ImageButton
+            android:id="@+id/release_IB"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/release"
+            android:background="@color/transparent"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerInside"
+            android:outlineAmbientShadowColor="@color/grey"
+            ></ImageButton>
+    </FrameLayout>
+
+
+</LinearLayout>

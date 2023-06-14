@@ -1,5 +1,6 @@
 package com.example.awaylie.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +12,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.awaylie.R;
+import com.example.awaylie.ReleaseQuestionActivity;
 import com.example.awaylie.fragments.releaseFragments.RumorFragment;
+import com.example.awaylie.fragments.releaseFragments.TruthFragment;
 import com.example.awaylie.fragments.releaseFragments.VerifyFragment;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.material.tabs.TabLayout;
@@ -23,10 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReleaseFragment extends Fragment {
-    private FloatingActionMenu releaseFAM;
+public class ReleaseFragment extends Fragment  {
     private ViewPager2 releaseVP;
     private TabLayout releaseTabLayout;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,18 +48,16 @@ public class ReleaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        releaseFAM = view.findViewById(R.id.release_FAM);
         releaseVP = view.findViewById(R.id.release_viewpager2);
         releaseTabLayout = view.findViewById(R.id.release_tablayout);
         bindVTF();
-
     }
-
     //这个函数用于绑定ViewPager+TabLayout+Fragment
     private void bindVTF(){
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new VerifyFragment());
         fragments.add(new RumorFragment());
+        fragments.add(new TruthFragment());
         releaseVP.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
@@ -77,18 +79,13 @@ public class ReleaseFragment extends Fragment {
                     case 1:
                         tab.setText("谣言");
                         break;
+                    case 2:
+                        tab.setText("真相");
+                        break;
                     default:
                         break;
                 }
             }
         }).attach();
-
-
-
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        releaseFAM.close(true);//当界面不可交互时，收起按钮菜单
     }
 }

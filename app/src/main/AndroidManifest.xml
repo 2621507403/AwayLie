@@ -15,6 +15,12 @@
         android:theme="@style/Theme.AwayLie"
         tools:targetApi="31">
         <activity
+            android:name=".ReleaseQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReleaseVerifyActivity"
+            android:exported="false" />
+        <activity
             android:name=".WebActivity"
             android:exported="false" />
         <activity
@@ -28,7 +34,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

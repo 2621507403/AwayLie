@@ -13,50 +13,19 @@
             android:id="@+id/release_tablayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            fab:tabTextColor="@color/black"
+            fab:tabTextColor="@color/white"
+            android:background="@color/deep_bule"
+            fab:tabIndicatorColor="@color/white"
+
             ></com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/release_viewpager2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/blue"
             >
         </androidx.viewpager2.widget.ViewPager2>
-
-
     </LinearLayout>
-    
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/release_FAM"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|end"
-        fab:menu_icon="@mipmap/release"
-        fab:menu_showShadow="true"
-        fab:menu_shadowColor="#66000000"
-        fab:menu_colorNormal="@color/transparent"
-        fab:menu_colorPressed="@color/transparent"
-        android:layout_marginBottom="20dp"
-        >
-        <com.github.clans.fab.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            fab:fab_showShadow="true"
-
-            fab:fab_shadowColor="#66000000"
-            fab:fab_colorNormal="@color/transparent"
-            fab:fab_colorPressed="@color/grey_transparent"
-
-            ></com.github.clans.fab.FloatingActionButton>
-        <com.github.clans.fab.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            fab:fab_showShadow="true"
-            fab:fab_shadowColor="#66000000"
-            android:scaleType="centerInside"
-            fab:fab_colorNormal="@color/transparent"
-            fab:fab_colorPressed="@color/grey_transparent"
-            ></com.github.clans.fab.FloatingActionButton>
-    </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>
