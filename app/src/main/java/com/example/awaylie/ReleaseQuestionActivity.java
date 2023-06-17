@@ -2,6 +2,7 @@ package com.example.awaylie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -36,13 +37,21 @@ public class ReleaseQuestionActivity extends AppCompatActivity {
     //数据库操作
     private AwayLieSQLiteOpenHelper mHelper;
 
+    private SharedPreferences userNameSP;
+    private String userName;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release_question);
-        initView();//对view进行初始化
+
+        //获取用户信息
+        userNameSP = getSharedPreferences("userInfo",MODE_PRIVATE);
+        userName = userNameSP.getString("name","");
+        //对view进行初始化
+        initView();
         releaseChoose.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
@@ -62,7 +71,7 @@ public class ReleaseQuestionActivity extends AppCompatActivity {
                     //按钮点击事件，用于负责将数据传入数据库中
                     VerifyBean verifyBean = new VerifyBean();
                     verifyBean.setTitle(releaseTitle.getText().toString());
-                    verifyBean.setName("user01");//应当从sp中获取，这里模拟一下
+                    verifyBean.setName(userName);//应当从sp中获取，这里模拟一下
                     verifyBean.setKeyword(releaseKeyword.getText().toString());
                     verifyBean.setTime(TimeGetUtil.getTime());
                     verifyBean.setContent(releaseContent.getContentText());

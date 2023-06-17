@@ -349,4 +349,20 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
         }
         return 0;
     }
+
+    //通过number查询整条数据，并返回结果userBean
+    public UserBean queryUserInfoByNumber(String number){
+        UserBean userBean = new UserBean();
+        Cursor cursor = mRDB.query(TABLE_USER_NAME,null,"unumber=?",new String[]{number},null,null,null);
+        if (cursor.moveToFirst()){
+            userBean.setNumber(cursor.getString(0));
+            userBean.setPassword(cursor.getString(1));
+            userBean.setName(cursor.getString(2));
+            userBean.setSignature(cursor.getString(3));
+            userBean.setCity(cursor.getString(4));
+            userBean.setBirth(cursor.getString(5));
+            userBean.setSex(cursor.getInt(6));
+        }
+        return userBean;
+    }
 }

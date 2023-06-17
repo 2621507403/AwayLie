@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -19,9 +20,10 @@ import android.widget.ImageView;
 public class InitShowActivity extends AppCompatActivity {
     private ImageView initShowIV;
     private Button skipShowPic;
-    private Handler handlerThreeSecond;
     final long threeSecond = 3000;//设置总的倒计时时间
     final long countInterval = 1000;//倒计时的间隔时间
+    private SharedPreferences loginStateSP;//判断是否已经登陆
+    private Boolean isLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class InitShowActivity extends AppCompatActivity {
         initShowIV = findViewById(R.id.init_show_pic);
         initShowIV.setImageResource(R.drawable.init_show_pic);
         skipShowPic = findViewById(R.id.skipShowPic);
-
+        loginStateSP = getSharedPreferences("userInfo",MODE_PRIVATE);
         /**加载界面跳过按钮**/
 //        skipShowPic.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -43,11 +45,15 @@ public class InitShowActivity extends AppCompatActivity {
         /**
          * 实现了默认三秒后跳转
          * */
-        handlerThreeSecond = new Handler(Looper.getMainLooper());
-        handlerThreeSecond.postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                nextPage(InitShowActivity.this,MainActivity.class);
+                isLogin = loginStateSP.getBoolean("isLogin",false);
+                if (isLogin)
+                    nextPage(InitShowActivity.this,MainActivity.class);
+                else{
+                    nextPage(InitShowActivity.this, LoginActivity.class);
+                }
             }
         },3000);
 

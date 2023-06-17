@@ -142,20 +142,12 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 String password = registerPassword.getText().toString();//输入的密码
                 if (!password.equals(registerPasswordSure.getText().toString())) registerPasswordSure.setTextColor(Color.RED);
                 else {//确认密码成功，将其加密后存入数据库
                     registerPasswordSure.setTextColor(Color.GREEN);
-                    try {
-                        String passwordSure = HashUtils.hash(password);
-                        registerBean.setPassword(passwordSure);//存储密码
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
                 }
             }
         });
@@ -228,6 +220,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerBean.setName(registerName.getText().toString());//设置用户名
+                try {
+                    String passwordSure = HashUtils.hash(registerPassword.getText().toString());
+                    registerBean.setPassword(passwordSure);//存储密码
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (registerBean.getNumber()==null || registerBean.getPassword()==null || registerBean.getName() == null
                 || registerBean.getCity() == null || registerBean.getBirth() == null ){
                     ToastUtils.showShortToast(RegisterActivity.this,"不能有空信息");
@@ -260,9 +258,4 @@ public class RegisterActivity extends AppCompatActivity {
         pvOptions.show();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mHelper.closeDB();
-    }
 }

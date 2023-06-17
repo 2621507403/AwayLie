@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用户昵称"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:textSize="18sp"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
@@ -39,17 +39,17 @@
             ></TextView>
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/mine_personal_signature"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
 
         android:layout_marginTop="56dp"
-        android:textSize="12sp"
+        android:text="个性签名"
         android:textColor="@color/black"
 
-        android:text="个性签名"
-        ></TextView>
+        android:textSize="12sp"></TextView>
 
 
 </LinearLayout>

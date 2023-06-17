@@ -62,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="发布者："
+                android:text="证明者："
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:textColor="@color/black"
@@ -137,6 +137,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:layout_marginTop="20dp"
                 ></TextView>
         </ScrollView>
         <TextView

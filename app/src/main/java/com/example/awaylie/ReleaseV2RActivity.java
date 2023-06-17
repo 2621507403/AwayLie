@@ -3,6 +3,7 @@ package com.example.awaylie;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +21,9 @@ import com.xuexiang.xui.widget.edittext.MultiLineEditText;
 import com.xuexiang.xui.widget.tabbar.TabControlView;
 import com.xuexiang.xui.widget.textview.badge.BadgeView;
 
+/**
+ * 这个界面是证实界面， 证实结果为谣言或者真相
+ * */
 public class ReleaseV2RActivity extends AppCompatActivity {
     private TitleBar titleBar;
     private TabControlView detailVorRSelect;
@@ -29,17 +33,22 @@ public class ReleaseV2RActivity extends AppCompatActivity {
     private MultiLineEditText detailEditContent;
     private int rumorNum;
     private int truthNum;
-
+    private SharedPreferences userNameSP;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release_v2_ractivity);
+        //获取用户信息
+        userNameSP = getSharedPreferences("userInfo",MODE_PRIVATE);
+        userName = userNameSP.getString("name","");
+
         initView();
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ReleaseV2RActivity.this,"点击有效",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
@@ -52,7 +61,7 @@ public class ReleaseV2RActivity extends AppCompatActivity {
                     RumorBean rumorBean = new RumorBean();
                     rumorBean.setVerifyId(verifyBean.getId());
                     rumorBean.setTime(TimeGetUtil.getTime());
-                    rumorBean.setName("user01");
+                    rumorBean.setName(userName);
                     rumorBean.setTitle(verifyBean.getTitle());
                     rumorBean.setContent(detailEditContent.getContentText());
                     if (mHelper.insert2rumor(rumorBean) > 0){
@@ -66,7 +75,7 @@ public class ReleaseV2RActivity extends AppCompatActivity {
                     TruthBean truthBean = new TruthBean();
                     truthBean.setVerifyId(verifyBean.getId());
                     truthBean.setTime(TimeGetUtil.getTime());
-                    truthBean.setName("user01");
+                    truthBean.setName(userName);
                     truthBean.setTitle(verifyBean.getTitle());
                     truthBean.setContent(detailEditContent.getContentText());
                     if (mHelper.insert2truth(truthBean) > 0){
