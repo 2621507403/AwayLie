@@ -6,8 +6,17 @@ public class TruthBean {
     private String name;
     private String time;
     private String content;
+    private String title;
 
     public TruthBean() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {

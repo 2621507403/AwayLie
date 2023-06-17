@@ -1,116 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical"
+    android:layout_height="100dp"
     android:layout_marginTop="10dp"
-    >
+    android:background="@color/grey_transparent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_weight="5"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="证明人："
                     android:gravity="center"
-                    android:textSize="12sp"
+                    android:text="辟谣者："
                     android:textColor="@color/black"
-                    ></TextView>
+                    android:textSize="12sp"></TextView>
+
                 <TextView
                     android:id="@+id/release_rumor_person_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="求证"
                     android:gravity="center"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:text="求证"
                     android:textColor="@color/black"
-                    ></TextView>
+                    android:textSize="12sp"
+                    android:textStyle="bold"></TextView>
+
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="谣言标题："
-
-                    android:textSize="18sp"
                     android:textColor="@color/black"
-                    ></TextView>
+                    android:textSize="18sp"></TextView>
+
                 <TextView
                     android:id="@+id/release_rumor_person_title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="发布者："
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:maxLength="20"
+                    android:text="发布者："
                     android:textColor="@color/black"
-                    ></TextView>
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
+
+
         </LinearLayout>
-        <Button
+
+        <com.xuexiang.xui.widget.button.ButtonView
             android:id="@+id/release_rumor_detail_btn"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            style="@style/ButtonView.Blue"
+            android:layout_width="70dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
-            android:text="查看详情"
-            android:textSize="16sp"
+            android:text="look"
             android:textColor="@color/black"
-            android:background="@color/transparent"
-            ></Button>
+            android:textSize="16sp"
+            app:textRadius="10dp"
+            app:textSelectedSolidColor="@color/grey"></com.xuexiang.xui.widget.button.ButtonView>
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:text="关键词:"
-            android:textSize="13sp"
-            android:textStyle="italic"
-            ></TextView>
-        <TextView
-            android:id="@+id/release_rumor_keyword"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:text="关键词"
-            android:textSize="13sp"
-            android:textStyle="italic"
-            ></TextView>
-    </LinearLayout>
+
     <TextView
         android:id="@+id/release_rumor_time"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:text="2023年6月2号"
-        android:textSize="17sp"
         android:textColor="@color/grey"
-        ></TextView>
+        android:textSize="14sp"></TextView>
 </LinearLayout>

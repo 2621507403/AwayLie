@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#4C83F2"
     >
 
     <ImageView
@@ -42,6 +41,7 @@
                 android:hint="请填写标题"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:layout_marginTop="50dp"
                 ></EditText>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,54 +56,52 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     ></EditText>
-                <Spinner
+                <com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner
                     android:id="@+id/release_question_keyword_spinner"
-                    android:layout_width="110dp"
-                    android:layout_height="50dp"
+                    style="@style/Material.SpinnerStyle"
                     android:background="@color/blue_transparent"
-                    android:layout_marginLeft="30dp"
-                    ></Spinner>
+                    android:layout_marginTop="?attr/xui_config_content_spacing_vertical"
+                    app:ms_entries="@array/sort_mode_entry"
+                    android:layout_marginLeft="20dp"
+                    ></com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
-                <EditText
+                <com.xuexiang.xui.widget.edittext.MultiLineEditText
                     android:id="@+id/release_question_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="380dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:lines="8"
-                    android:gravity="top|left"
-                    android:background="@color/grey_transparent"
-                    android:layout_weight="5"
-                    ></EditText>
-                <Button
+                    app:mlet_hintText="请输入内容"
+                    ></com.xuexiang.xui.widget.edittext.MultiLineEditText>
+
+                <com.xuexiang.xui.widget.button.ButtonView
                     android:id="@+id/release_question_submitBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.6"
-                    android:layout_gravity="center|top"
-                    android:background="@color/blue_transparent"
+                    style="@style/ButtonView.Blue"
+                    android:layout_gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    android:layout_marginTop="20dp"
                     android:text="发布"
-                    ></Button>
+                    ></com.xuexiang.xui.widget.button.ButtonView>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
                     android:orientation="horizontal"
                     android:gravity="center"
-
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="bottom"
                         android:orientation="horizontal"
+                        android:layout_marginBottom="30dp"
                         >
                         <RadioButton
                             android:id="@+id/release_question_check"

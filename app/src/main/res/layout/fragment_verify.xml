@@ -3,37 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <ImageView
-        android:src="@drawable/vertify"
+        android:src="@drawable/verify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ImageView>
+        android:layout_height="200dp"
+        ></ImageView>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/release_verify_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
-        <ImageButton
+            android:layout_height="match_parent"
+            ></androidx.recyclerview.widget.RecyclerView>
+        <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
             android:id="@+id/release_IB"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="bottom|end"
-            android:src="@drawable/release"
-            android:background="@color/transparent"
+            app:sb_shape_type="round"
+            android:background="@drawable/release"
             android:layout_marginBottom="20dp"
-            android:scaleType="centerInside"
+
             android:outlineAmbientShadowColor="@color/grey"
-            ></ImageButton>
+            ></com.xuexiang.xui.widget.button.shadowbutton.ShadowButton>
     </FrameLayout>
 
 

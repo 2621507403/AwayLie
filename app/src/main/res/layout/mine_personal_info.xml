@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:orientation="horizontal"
+    android:background="@drawable/peak"
+    android:id="@+id/mine_personal_view_btn"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mine_personal_profile_photo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center"
+            android:src="@drawable/xiaoxin"
+            ></de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:id="@+id/mine_personal_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户昵称"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+
+            ></TextView>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/mine_personal_signature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="56dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+
+        android:text="个性签名"
+        ></TextView>
+
+
+</LinearLayout>

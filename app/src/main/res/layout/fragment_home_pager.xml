@@ -3,15 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/blue"
     >
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="#299EE3"
+        app:title="首页"
+        app:titleCentered="true"
+        ></com.google.android.material.appbar.MaterialToolbar>
+
+
     <com.youth.banner.Banner
         android:id="@+id/homePager_banner"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
         ></com.youth.banner.Banner>
     <TextView
         android:layout_width="match_parent"

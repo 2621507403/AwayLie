@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/register_back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_leftText="返回"
+        app:tb_titleText="注册"
+        ></com.xuexiang.xui.widget.actionbar.TitleBar>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="275dp"
+        android:src="@drawable/water_point"
+        ></ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
+        <EditText
+            android:id="@+id/register_number"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="请输入账号"
+            android:layout_gravity="center"
+            android:inputType="number"
+            ></EditText>
+        <com.xuexiang.xui.widget.edittext.PasswordEditText
+            android:id="@+id/register_password"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="请输入密码"
+            android:layout_gravity="center"
+            ></com.xuexiang.xui.widget.edittext.PasswordEditText>
+
+        <com.xuexiang.xui.widget.edittext.PasswordEditText
+            android:id="@+id/register_password_sure"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="请确认密码"
+            android:layout_gravity="center"
+            ></com.xuexiang.xui.widget.edittext.PasswordEditText>
+
+        <EditText
+            android:id="@+id/register_name"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="请输入昵称"
+            android:layout_gravity="center"
+            ></EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="@color/black"
+                android:text="您的性别"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginRight="50dp"
+                ></TextView>
+
+            <com.xuexiang.xui.widget.alpha.XUIAlphaButton
+                android:id="@+id/register_sex_btn"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+
+
+                ></com.xuexiang.xui.widget.alpha.XUIAlphaButton>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="@color/black"
+                android:text="您的城市"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginRight="50dp"
+                android:gravity="center"
+                ></TextView>
+            <com.xuexiang.xui.widget.button.ButtonView
+                android:id="@+id/register_city_btn"
+                style="@style/ButtonView.Blue"
+                android:layout_width="wrap_content"
+                android:text="选择城市"
+                ></com.xuexiang.xui.widget.button.ButtonView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="@color/black"
+                android:text="您的生日"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginRight="50dp"
+                android:gravity="center"
+                ></TextView>
+            <com.xuexiang.xui.widget.button.ButtonView
+                android:id="@+id/register_birth_btn"
+                style="@style/ButtonView.Blue"
+                android:layout_width="wrap_content"
+                android:text="选择日期"
+                ></com.xuexiang.xui.widget.button.ButtonView>
+
+        </LinearLayout>
+
+        <com.xuexiang.xui.widget.button.ButtonView
+            android:id="@+id/register_btn"
+            style="@style/ButtonView.Blue"
+            android:layout_gravity="center"
+            android:text="注册"
+            android:layout_marginTop="30dp"
+            ></com.xuexiang.xui.widget.button.ButtonView>
+
+    </LinearLayout>
+
+</LinearLayout>

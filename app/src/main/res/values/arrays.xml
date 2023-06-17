@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_mode_entry">
+        <item></item>
+        <item>校园暴力</item>
+        <item>社会秩序</item>
+        <item>男女对立</item>
+    </string-array>
+    <string-array name="sex_option">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+</resources>

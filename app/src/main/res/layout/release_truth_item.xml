@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:background="@color/grey_transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="证实者："
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/release_truth_person_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="求证"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    ></TextView>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="证实标题："
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/release_truth_person_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="发布者："
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:maxLength="20"
+                    android:textColor="@color/black"
+                    ></TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <com.xuexiang.xui.widget.button.ButtonView
+            android:id="@+id/release_truth_detail_btn"
+            style="@style/ButtonView.Blue"
+            android:layout_gravity="center"
+            android:layout_width="70dp"
+            android:text="look"
+            android:textSize="16sp"
+            app:textRadius="10dp"
+            android:textColor="@color/black"
+            app:textSelectedSolidColor="@color/grey"
+            android:layout_marginRight="20dp"
+            ></com.xuexiang.xui.widget.button.ButtonView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/release_truth_time"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="2023年6月2号"
+        android:textSize="14sp"
+        android:textColor="@color/grey"
+        android:layout_marginLeft="10dp"
+        ></TextView>
+</LinearLayout>

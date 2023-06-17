@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/verify_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_leftText="返回"
+        android:background="@color/xui_config_color_titlebar"
+        ></com.xuexiang.xui.widget.actionbar.TitleBar>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="235dp"
+        android:background="@color/white"
+        android:src="@drawable/verifydetail">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="我认为这是："
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            ></TextView>
+        <com.xuexiang.xui.widget.tabbar.TabControlView
+            android:id="@+id/detail_v2r_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tcv_defaultSelection="0"
+            android:layout_marginLeft="50dp"
+            ></com.xuexiang.xui.widget.tabbar.TabControlView>
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="我的理由如下："
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:gravity="center"
+        ></TextView>
+    <com.xuexiang.xui.widget.edittext.MultiLineEditText
+        android:id="@+id/detail_v2r_edit_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:mlet_maxCount="400"
+        />
+    <com.xuexiang.xui.widget.button.ButtonView
+        android:id="@+id/detail_v2r_submit"
+        style="@style/ButtonView.Green"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:text="保存并提交"
+        ></com.xuexiang.xui.widget.button.ButtonView>
+
+</LinearLayout>

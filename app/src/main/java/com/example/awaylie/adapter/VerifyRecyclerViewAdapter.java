@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.awaylie.R;
 import com.example.awaylie.ReleaseVerifyActivity;
 import com.example.awaylie.bean.VerifyBean;
+import com.xuexiang.xui.widget.button.ButtonView;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -51,7 +52,6 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
         });
     }
 
-
     @Override
     public int getItemCount() {
         return verifyBeanList.size();
@@ -60,7 +60,7 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
     class MyVerifyViewHold extends RecyclerView.ViewHolder{
         private TextView releaseVerifyPersonName,releaseVerifyPersonTitle;
         private TextView releaseVerifyKeyword,releaseVerifyTime;
-        private Button releaseVerifyDetail;
+        private ButtonView releaseVerifyDetail;
         public MyVerifyViewHold(@NonNull View itemView) {
             super(itemView);
             releaseVerifyPersonName = itemView.findViewById(R.id.release_verify_person_name);

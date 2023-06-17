@@ -17,15 +17,21 @@ import android.widget.Toast;
 
 import com.example.awaylie.bean.VerifyBean;
 import com.example.awaylie.database.AwayLieSQLiteOpenHelper;
+import com.example.awaylie.utils.TimeGetUtil;
+import com.xuexiang.xui.widget.button.ButtonView;
+import com.xuexiang.xui.widget.edittext.MultiLineEditText;
+import com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner;
 
+import java.text.BreakIterator;
 import java.util.Calendar;
 
 
 //主要是点击发布后，弹出的填入提出问题的表单界面
 public class ReleaseQuestionActivity extends AppCompatActivity {
-    private EditText releaseTitle , releaseKeyword , releaseContent;
-    private Spinner releaseChoose;
-    private Button releaseBtn;
+    private EditText releaseTitle , releaseKeyword ;
+    private MultiLineEditText releaseContent;
+    private MaterialSpinner releaseChoose;
+    private ButtonView releaseBtn;
     private RadioButton releaseCheck;
     //数据库操作
     private AwayLieSQLiteOpenHelper mHelper;
@@ -37,18 +43,29 @@ public class ReleaseQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release_question);
         initView();//对view进行初始化
-        initSpinner();//对releaseChoose进行初始化
+        releaseChoose.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                releaseKeyword.append((CharSequence) item);
+            }
+        });
+
         releaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (releaseCheck.isChecked()){
+                    //先判断是否有空，有空的弹出提示
+                    if (releaseTitle.getText().toString().equals("") || releaseKeyword.getText().toString().equals("")||releaseContent.getContentText().equals("")){
+                        Toast.makeText(ReleaseQuestionActivity.this,"不能有空数据",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     //按钮点击事件，用于负责将数据传入数据库中
                     VerifyBean verifyBean = new VerifyBean();
                     verifyBean.setTitle(releaseTitle.getText().toString());
                     verifyBean.setName("user01");//应当从sp中获取，这里模拟一下
                     verifyBean.setKeyword(releaseKeyword.getText().toString());
-                    verifyBean.setTime(getTime());
-                    verifyBean.setContent(releaseContent.getText().toString());
+                    verifyBean.setTime(TimeGetUtil.getTime());
+                    verifyBean.setContent(releaseContent.getContentText());
                     if (mHelper.insert2verify(verifyBean) > 0 )
                         Toast.makeText(ReleaseQuestionActivity.this,"插入成功",Toast.LENGTH_SHORT).show();
                     else Toast.makeText(ReleaseQuestionActivity.this,"插入失败",Toast.LENGTH_SHORT).show();
@@ -70,27 +87,6 @@ public class ReleaseQuestionActivity extends AppCompatActivity {
         mHelper.openReadLink();
     }
 
-    private void initSpinner() {
-        String[] items = new String[]{"","校园暴力","社会秩序","男女对立"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        releaseChoose.setAdapter(adapter);
-        releaseChoose.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String releaseChooseItem = items[position];
-                releaseKeyword.append(releaseChooseItem);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-
-    }
 
     //对view进行初始化
     private void initView(){
@@ -103,18 +99,6 @@ public class ReleaseQuestionActivity extends AppCompatActivity {
     }
 
 
-    //获取当前时间
-    private String getTime(){
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-
-        return year + "-" + month + "-" + day + "  " + hour + ":" + minute + ":00";
-
-    }
 
     @Override
     protected void onDestroy() {

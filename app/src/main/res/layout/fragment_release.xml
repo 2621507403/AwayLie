@@ -3,29 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/release_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#299EE3"
+            >
+            <com.xuexiang.xui.widget.searchview.MaterialSearchView
+                android:id="@+id/release_searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></com.xuexiang.xui.widget.searchview.MaterialSearchView>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/release_tablayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            fab:tabTextColor="@color/white"
             android:background="@color/deep_bule"
             fab:tabIndicatorColor="@color/white"
+            fab:tabTextColor="@color/white"
 
             ></com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/release_viewpager2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/blue"
-            >
-        </androidx.viewpager2.widget.ViewPager2>
+            android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
     </LinearLayout>
 
 </FrameLayout>

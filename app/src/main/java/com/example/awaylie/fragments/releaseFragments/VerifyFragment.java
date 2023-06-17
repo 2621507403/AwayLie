@@ -22,6 +22,7 @@ import com.example.awaylie.ReleaseQuestionActivity;
 import com.example.awaylie.adapter.VerifyRecyclerViewAdapter;
 import com.example.awaylie.bean.VerifyBean;
 import com.example.awaylie.database.AwayLieSQLiteOpenHelper;
+import com.xuexiang.xui.widget.button.shadowbutton.ShadowButton;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ import java.util.List;
      *
      * */
 public class VerifyFragment extends Fragment {
-    private ImageButton releaseIBtn;
+    private ShadowButton releaseIBtn;
     private RecyclerView releaseVerifyRV;
     private AwayLieSQLiteOpenHelper mHelper;
     @Override
