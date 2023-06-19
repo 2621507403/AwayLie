@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private String number;//这是存放输入的number
     private String password;//这是存放输入的密码的hash结果
     private UserBean loginUserBean;
+    private boolean numberCorrect = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +92,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (s.length() == 11){
                     number = loginNumber.getText().toString();
                     if (mHelper.queryUserIsExist(number)==0){//数据库中没有，需要注册
+                        numberCorrect = false;
                         //TODO：换成弹窗，有个跳转到注册界面的弹窗按钮
                         ToastUtils.showShortToast(LoginActivity.this,"未注册，请注册");
+                    }else{
+                        numberCorrect = true;
                     }
                 }
             }
@@ -105,6 +109,9 @@ public class LoginActivity extends AppCompatActivity {
         loginInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!numberCorrect){
+                    return;
+                }
                 //获取到输入的密码的hash值
                 try {
                     password = HashUtils.hash(loginPassword.getText().toString());

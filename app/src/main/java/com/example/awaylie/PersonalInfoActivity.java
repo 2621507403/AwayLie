@@ -9,6 +9,10 @@ import android.view.View;
 
 import com.xuexiang.xui.widget.button.ButtonView;
 
+/**
+ * 这个界面是点开设置界面后弹出的页面
+ * 包括功能块：退出登录，
+ * */
 public class PersonalInfoActivity extends AppCompatActivity {
     private ButtonView loginOut;
     private SharedPreferences userInfoSP;

@@ -1,5 +1,6 @@
 package com.example.awaylie.database;
 
+import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -55,7 +56,7 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
          * content表示提问时提交的内容
          * */
         String sql = "create table if not exists "+TABLE_VERIFY_NAME+" (" +
-                "_id integer primary key autoincrement not null," +
+                " _id integer primary key autoincrement not null," +
                 " name text not null," +
                 " keyword text not null," +
                 " title text not null," +
@@ -193,6 +194,23 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
         return verifyBeanList;
     }
 
+    //从verify表中通过给的title查询数据并且交给recyclerView进行展示,通过list回传
+    public List<VerifyBean> queryAllVerifyByTitle( String title){
+        List<VerifyBean> verifyBeanList = new ArrayList<>();
+        Cursor cursor = mRDB.query(TABLE_VERIFY_NAME,null,"title = ?",new String[]{title},null,null,null);
+        while(cursor.moveToNext()){
+            VerifyBean verifyBean = new VerifyBean();
+            verifyBean.setId(cursor.getInt(0));
+            verifyBean.setName(cursor.getString(1));
+            verifyBean.setKeyword(cursor.getString(2));
+            verifyBean.setTitle(cursor.getString(3));
+            verifyBean.setTime(cursor.getString(4));
+            verifyBean.setContent(cursor.getString(5));
+            verifyBeanList.add(0,verifyBean);
+        }
+        cursor.close();
+        return verifyBeanList;
+    }
 
     //从rumor表中查询数据并且交给recyclerView进行展示,通过list回传
     public List<RumorBean> queryAllRumor(){
@@ -212,10 +230,46 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
         return rumorBeanList;
     }
 
+    //从rumor表中查询数据并且交给recyclerView进行展示,通过list回传
+    public List<RumorBean> queryAllRumorByTitle(String title){
+        List<RumorBean> rumorBeanList = new ArrayList<>();
+        Cursor cursor = mRDB.query(TABLE_RUMOR_NAME,null,"title = ?",new String[]{title},null,null,null);
+        while(cursor.moveToNext()){
+            RumorBean rumorBean = new RumorBean();
+            rumorBean.setId(cursor.getInt(0));
+            rumorBean.setName(cursor.getString(1));
+            rumorBean.setVerifyId(cursor.getInt(2));
+            rumorBean.setTime(cursor.getString(3));
+            rumorBean.setTitle(cursor.getString(4));
+            rumorBean.setContent(cursor.getString(5));
+            rumorBeanList.add(0,rumorBean);
+        }
+        cursor.close();
+        return rumorBeanList;
+    }
+
     //从truth表中查询数据并且交给recyclerView进行展示,通过list回传
     public List<TruthBean> queryAllTruth(){
         List<TruthBean> truthBeanList = new ArrayList<>();
         Cursor cursor = mRDB.query(TABLE_TRUTH_NAME,null,null,null,null,null,null);
+        while(cursor.moveToNext()){
+            TruthBean truthBean = new TruthBean();
+            truthBean.setId(cursor.getInt(0));
+            truthBean.setName(cursor.getString(1));
+            truthBean.setVerifyId(cursor.getInt(2));
+            truthBean.setTime(cursor.getString(3));
+            truthBean.setTitle(cursor.getString(4));
+            truthBean.setContent(cursor.getString(5));
+            truthBeanList.add(0,truthBean);
+        }
+        cursor.close();
+        return truthBeanList;
+    }
+
+    //从truth表中通过title查询数据并且交给recyclerView进行展示,通过list回传
+    public List<TruthBean> queryAllTruthByTitle(String title){
+        List<TruthBean> truthBeanList = new ArrayList<>();
+        Cursor cursor = mRDB.query(TABLE_TRUTH_NAME,null,"title = ?",new String[]{title},null,null,null);
         while(cursor.moveToNext()){
             TruthBean truthBean = new TruthBean();
             truthBean.setId(cursor.getInt(0));
@@ -365,4 +419,15 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
         }
         return userBean;
     }
+
+    //通过关键字查询verify表，并且返回cursor对象，供搜索适配器进行调用,模糊查询
+    public Cursor queryVerifyByTitle(String title){
+        String[] columns = { "_id", "title AS " + SearchManager.SUGGEST_COLUMN_TEXT_1 };
+        Cursor cursor = mRDB.query(TABLE_VERIFY_NAME,columns,"title LIKE ?",new String[]{title+"%"},"title",null,null);
+        return cursor;
+    }
+
+
+
+
 }

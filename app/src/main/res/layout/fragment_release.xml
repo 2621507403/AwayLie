@@ -15,15 +15,9 @@
             android:layout_height="52dp"
             android:background="#299EE3"
             >
-            <com.xuexiang.xui.widget.searchview.MaterialSearchView
-                android:id="@+id/release_searchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></com.xuexiang.xui.widget.searchview.MaterialSearchView>
+
 
         </com.google.android.material.appbar.MaterialToolbar>
-
-
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/release_tablayout"
@@ -40,5 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
     </LinearLayout>
+    <com.xuexiang.xui.widget.searchview.MaterialSearchView
+        android:id="@+id/release_searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></com.xuexiang.xui.widget.searchview.MaterialSearchView>
 
 </FrameLayout>

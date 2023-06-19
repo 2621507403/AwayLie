@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //在主线程中更新ui
-                        //Log.d("MainActivity", "onCreate: "+weatherText);
+                        Log.d("MainActivity", "onCreate: "+weatherText);
                         topBarWeatherTV.setText(weatherText);
                     }
                 });
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-//                String text = getWeather("合肥");//这里的合肥是模拟数据
+                getWeather("合肥");//这里的合肥是模拟数据
                 WeatherController weatherController = new WeatherController();
                 String cityCode = weatherController.getCityCodeByName(cityName);
                 List<WeatherBean> weatherBeanList = weatherController.getWeatherByCityCode(cityCode);

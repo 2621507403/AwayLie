@@ -30,7 +30,7 @@ public class InitShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_init_show);
 
         initShowIV = findViewById(R.id.init_show_pic);
-        initShowIV.setImageResource(R.drawable.init_show_pic);
+        initShowIV.setImageResource(R.drawable.init_show_pager);
         skipShowPic = findViewById(R.id.skipShowPic);
         loginStateSP = getSharedPreferences("userInfo",MODE_PRIVATE);
         /**加载界面跳过按钮**/
