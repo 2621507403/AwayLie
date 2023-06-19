@@ -15,6 +15,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.awaylie.bean.WeatherBean;
 import com.example.awaylie.controller.WeatherController;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 mainPagerVP2;
     private TabLayout mainPagerTabLayout;
     private List<Fragment> fragments;
+
+    private static final int BACK_PRESS_INTERVAL = 2000; // 2秒内再次按下返回键才退出应用
+
+    private long mLastBackPressTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +184,19 @@ public class MainActivity extends AppCompatActivity {
                 handler.sendMessage(m);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - mLastBackPressTime < BACK_PRESS_INTERVAL) {
+            // 2秒内再次按下返回键，退出应用
+            super.onBackPressed();
+        } else {
+            // 弹出提示
+            Toast.makeText(this, "再按一次返回键退出应用", Toast.LENGTH_SHORT).show();
+            mLastBackPressTime = currentTime;
+        }
     }
 
 }
