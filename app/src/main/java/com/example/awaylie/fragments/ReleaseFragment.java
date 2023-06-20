@@ -46,6 +46,10 @@ public class ReleaseFragment extends Fragment  {
     private MaterialSearchView releaseSearchView;
     private MaterialToolbar releaseToolBar;
 
+    private static final int BACK_PRESS_INTERVAL = 2000; // 2秒内再次按下返回键才退出应用
+
+    private long mLastBackPressTime = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,4 +151,5 @@ public class ReleaseFragment extends Fragment  {
             }
         }).attach();
     }
+
 }
