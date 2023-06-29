@@ -2,10 +2,13 @@ package com.example.awaylie.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.awaylie.R;
 import com.example.awaylie.ReleaseVerifyActivity;
 import com.example.awaylie.bean.VerifyBean;
+import com.example.awaylie.database.AwayLieSQLiteOpenHelper;
+import com.example.awaylie.interfaceClass.OnItemLongClickListener;
+import com.xuexiang.xui.adapter.simple.ViewHolder;
 import com.xuexiang.xui.widget.button.ButtonView;
 
 import java.util.List;
@@ -22,11 +28,18 @@ import java.util.zip.Inflater;
 public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecyclerViewAdapter.MyVerifyViewHold> {
     private List<VerifyBean> verifyBeanList;
     private Context context;
+    private VerifyBean verifyBean;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
-    public void setVerifyBeanList(List<VerifyBean> verifyBeanList,Context context) {
+    public void setmOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
+        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    }
+
+    public void setVerifyBeanList(List<VerifyBean> verifyBeanList, Context context) {
         this.verifyBeanList = verifyBeanList;
         this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -37,7 +50,7 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MyVerifyViewHold holder, int position) {
-        VerifyBean verifyBean = verifyBeanList.get(position);//通过list获取单个的对象
+        verifyBean = verifyBeanList.get(position);//通过list获取单个的对象
         holder.releaseVerifyPersonName.setText(verifyBean.getName());
         holder.releaseVerifyPersonTitle.setText(verifyBean.getTitle());
         holder.releaseVerifyKeyword.setText(verifyBean.getKeyword());
@@ -50,6 +63,17 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
                 context.startActivity(intent);
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnItemLongClickListener != null) {
+                    int currentPosition = holder.getAdapterPosition();
+                    mOnItemLongClickListener.onItemLongClick(holder.itemView, currentPosition);
+                }
+                return true;
+            }
+        });
+
     }
 
     @Override

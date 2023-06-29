@@ -10,12 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import com.example.awaylie.R;
 import com.example.awaylie.ReleaseQuestionActivity;
@@ -26,6 +29,7 @@ import com.example.awaylie.bean.RumorBean;
 import com.example.awaylie.bean.TruthBean;
 import com.example.awaylie.bean.VerifyBean;
 import com.example.awaylie.database.AwayLieSQLiteOpenHelper;
+import com.example.awaylie.interfaceClass.OnItemLongClickListener;
 
 import java.util.List;
 
@@ -36,6 +40,8 @@ import java.util.List;
 public class TruthFragment extends Fragment {
     private RecyclerView releaseTruthRV;
     private AwayLieSQLiteOpenHelper mHelper;
+
+    private SwipeRefreshLayout releaseTruthRefresh;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +69,18 @@ public class TruthFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         releaseTruthRV = view.findViewById(R.id.release_truthRV);
+        releaseTruthRefresh = view.findViewById(R.id.release_truth_refresh);
+        releaseTruthRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                List<TruthBean> truthBeanList = mHelper.queryAllTruth();//查询数据库中的数据
+                TruthRecyclerViewAdapter adapter = (TruthRecyclerViewAdapter) releaseTruthRV.getAdapter();
+                adapter.setVerifyBeanList(truthBeanList,getActivity());
+                adapter.notifyDataSetChanged();
+                //隐藏
+                releaseTruthRefresh.setRefreshing(false);
+            }
+        });
     }
     @Override
     public void onResume() {
@@ -92,6 +110,29 @@ public class TruthFragment extends Fragment {
         //创建适配器对象
         TruthRecyclerViewAdapter truthAdapter = new TruthRecyclerViewAdapter();
         truthAdapter.setVerifyBeanList(truthBeanList,getActivity());
+
+        truthAdapter.setmOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                //弹出菜单项
+                PopupMenu deletePop = new PopupMenu(getActivity(),view);
+                deletePop.inflate(R.menu.verify_item_menu);
+                deletePop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.verify_item_delete){
+                            TruthBean truthBean = truthBeanList.get(position);
+                            truthBeanList.remove(position);
+                            truthAdapter.notifyItemRemoved(position);
+                            mHelper.deleteTruthItemById(truthBean.getId());
+                        }
+                        return true;
+                    }
+                });
+                deletePop.show();
+            }
+        });
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         releaseTruthRV.setLayoutManager(linearLayoutManager);
         releaseTruthRV.setAdapter(truthAdapter);

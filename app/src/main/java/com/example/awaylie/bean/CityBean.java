@@ -1,6 +1,6 @@
 package com.example.awaylie.bean;
 
-public class CityBean {
+public class CityBean  {
     private String areacode ;
     private String name;
     private String country;
@@ -37,4 +37,5 @@ public class CityBean {
     public void setPath(String path) {
         this.path = path;
     }
+
 }

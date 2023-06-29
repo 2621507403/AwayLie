@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -20,7 +18,7 @@ import android.widget.Toast;
 import com.example.awaylie.bean.WeatherBean;
 import com.example.awaylie.controller.WeatherController;
 import com.example.awaylie.fragments.HomePagerFragment;
-import com.example.awaylie.fragments.MessageFragment;
+import com.example.awaylie.fragments.ToolsFragment;
 import com.example.awaylie.fragments.MineFragment;
 import com.example.awaylie.fragments.ReleaseFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         fragments = new ArrayList<>();
         fragments.add(new HomePagerFragment());
         fragments.add(new ReleaseFragment());
-        fragments.add(new MessageFragment());
+        fragments.add(new ToolsFragment());
         fragments.add(new MineFragment());
 
         //对viewpager进行操作
@@ -165,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //在主线程中更新ui
-                        Log.d("MainActivity", "onCreate: "+weatherText);
                         topBarWeatherTV.setText(weatherText);
                     }
                 });

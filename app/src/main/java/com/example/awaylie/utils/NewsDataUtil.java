@@ -19,7 +19,6 @@ import okhttp3.Response;
 //这个工具用于返回list<news>数据
 public class NewsDataUtil {
 
-
     public static List<HomePagerNewsDataBean> getNewsData(){
 
         List<HomePagerNewsDataBean> newsDataBeanList;

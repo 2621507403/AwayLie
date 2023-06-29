@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/blue_transparent"
+
+    >
+    <com.xuexiang.xui.widget.edittext.MultiLineEditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mlet_maxCount="50"
+        android:inputType="text"
+        app:mlet_hintText="请输入个性签名......"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+
+        >
+
+        <com.xuexiang.xui.widget.button.ButtonView
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            style="@style/ButtonView.Gray"
+            android:layout_weight="1"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:text="取消" />
+
+        <com.xuexiang.xui.widget.button.ButtonView
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            style="@style/ButtonView.Green"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="保存" />
+    </LinearLayout>
+</LinearLayout>

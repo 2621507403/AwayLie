@@ -10,18 +10,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import com.example.awaylie.R;
 import com.example.awaylie.ReleaseQuestionActivity;
 import com.example.awaylie.adapter.VerifyRecyclerViewAdapter;
 import com.example.awaylie.bean.VerifyBean;
 import com.example.awaylie.database.AwayLieSQLiteOpenHelper;
+import com.example.awaylie.interfaceClass.OnItemLongClickListener;
 import com.xuexiang.xui.widget.button.shadowbutton.ShadowButton;
 
 import java.util.List;
@@ -34,6 +38,8 @@ public class VerifyFragment extends Fragment {
     private ShadowButton releaseIBtn;
     private RecyclerView releaseVerifyRV;
     private AwayLieSQLiteOpenHelper mHelper;
+
+    private SwipeRefreshLayout releaseRefresh;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +68,18 @@ public class VerifyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         releaseIBtn = view.findViewById(R.id.release_IB);
         releaseVerifyRV = view.findViewById(R.id.release_verify_rv);
-
+        releaseRefresh = view.findViewById(R.id.release_verify_refresh);
+        releaseRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                List<VerifyBean> verifyBeanList = mHelper.queryAllVerify();//查询数据库中的数据
+                VerifyRecyclerViewAdapter verifyRecyclerViewAdapter = (VerifyRecyclerViewAdapter) releaseVerifyRV.getAdapter();
+                verifyRecyclerViewAdapter.setVerifyBeanList(verifyBeanList,getActivity());
+                verifyRecyclerViewAdapter.notifyDataSetChanged();
+                //刷新完成后，隐藏进度指示器
+                releaseRefresh.setRefreshing(false);
+            }
+        });
         releaseIBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,14 +117,36 @@ public class VerifyFragment extends Fragment {
     //对recyclerView的初始化及数据展示
     private void initRecyclerView(){
         List<VerifyBean> verifyBeanList = mHelper.queryAllVerify();//查询数据库中的数据
-        Log.d("VerifyFragment", "initRecyclerView: "+verifyBeanList);
+//        Log.d("VerifyFragment", "initRecyclerView: "+verifyBeanList);
         //创建适配器对象
         VerifyRecyclerViewAdapter verifyAdapter = new VerifyRecyclerViewAdapter();
         verifyAdapter.setVerifyBeanList(verifyBeanList,getActivity());
+        verifyAdapter.setmOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Log.d("verify", "onItemLongClick: "+position);
+                //弹出菜单
+                PopupMenu deletePop = new PopupMenu(getActivity(),view);
+                deletePop.inflate(R.menu.verify_item_menu);
+                deletePop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.verify_item_delete){
+                            VerifyBean verifyBean = verifyBeanList.get(position);
+                            verifyBeanList.remove(position);
+                            verifyAdapter.notifyItemRemoved(position);
+                            mHelper.deleteVerifyItemById(verifyBean.getId());
+                        }
+                        return true;
+                    }
+                });
+                deletePop.show();
+            }
+        });
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         releaseVerifyRV.setLayoutManager(linearLayoutManager);
         releaseVerifyRV.setAdapter(verifyAdapter);
-
     }
 
     @Override

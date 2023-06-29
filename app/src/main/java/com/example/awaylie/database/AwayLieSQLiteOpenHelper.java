@@ -113,6 +113,14 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    //启动级联删除
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
     //打开数据库读权限
     public SQLiteDatabase openReadLink(){
         if (mRDB == null || !mRDB.isOpen()){
@@ -131,14 +139,14 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
 
     //关闭连接数据库
     public void closeDB(){
-        if ( mRDB != null && mRDB.isOpen()){
-            mRDB.close();
-            mRDB = null;
-        }
-        if ( mWDB != null && mWDB.isOpen()){
-            mWDB.close();
-            mWDB = null;
-        }
+//        if ( mRDB != null && mRDB.isOpen()){
+//            mRDB.close();
+//            mRDB = null;
+//        }
+//        if ( mWDB != null && mWDB.isOpen()){
+//            mWDB.close();
+//            mWDB = null;
+//        }
     }
 
     //插入单条数据到verify表中
@@ -428,6 +436,18 @@ public class AwayLieSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
 
+    //长按删除item，这是verify的逻辑，删除verify数据会连带删除rumor和truth中相关的数据
+    public int deleteVerifyItemById(int id){
+        return mWDB.delete(TABLE_VERIFY_NAME,"_id = ?",new String[]{String.valueOf(id)});
+    }
 
+    //长按删除item，这是rumor的逻辑
+    public int deleteRumorItemById(int id){
+        return mWDB.delete(TABLE_RUMOR_NAME,"_id = ?",new String[]{String.valueOf(id)});
+    }
+    //长按删除item，这是truth的逻辑
+    public int deleteTruthItemById(int id){
+        return mWDB.delete(TABLE_TRUTH_NAME,"_id = ?",new String[]{String.valueOf(id)});
+    }
 
 }

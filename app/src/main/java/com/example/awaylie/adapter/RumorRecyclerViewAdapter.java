@@ -16,6 +16,7 @@ import com.example.awaylie.ReleaseRumorActivity;
 import com.example.awaylie.ReleaseVerifyActivity;
 import com.example.awaylie.bean.RumorBean;
 import com.example.awaylie.bean.VerifyBean;
+import com.example.awaylie.interfaceClass.OnItemLongClickListener;
 import com.xuexiang.xui.widget.button.ButtonView;
 
 import java.util.List;
@@ -23,8 +24,13 @@ import java.util.List;
 public class RumorRecyclerViewAdapter extends RecyclerView.Adapter<RumorRecyclerViewAdapter.MyVerifyViewHold> {
     private List<RumorBean> rumorBeanList;
     private Context context;
+    private OnItemLongClickListener itemLongClickListener;
 
-    public void setVerifyBeanList(List<RumorBean> rumorBeanList,Context context) {
+    public void setItemLongClickListener(OnItemLongClickListener itemLongClickListener) {
+        this.itemLongClickListener = itemLongClickListener;
+    }
+
+    public void setVerifyBeanList(List<RumorBean> rumorBeanList, Context context) {
         this.rumorBeanList = rumorBeanList;
         this.context = context;
     }
@@ -50,6 +56,15 @@ public class RumorRecyclerViewAdapter extends RecyclerView.Adapter<RumorRecycler
                 context.startActivity(intent);
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int currentPosition = holder.getAdapterPosition();
+                itemLongClickListener.onItemLongClick(v,currentPosition);
+                return true;
+            }
+        });
+
     }
 
     @Override

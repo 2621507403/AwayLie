@@ -137,11 +137,10 @@ public class ReleaseV2RActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-
     }
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         mHelper.closeDB();
     }
 }

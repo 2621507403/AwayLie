@@ -16,6 +16,7 @@ import com.example.awaylie.ReleaseRumorActivity;
 import com.example.awaylie.ReleaseTruthActivity;
 import com.example.awaylie.bean.RumorBean;
 import com.example.awaylie.bean.TruthBean;
+import com.example.awaylie.interfaceClass.OnItemLongClickListener;
 import com.xuexiang.xui.widget.button.ButtonView;
 
 import java.util.List;
@@ -23,8 +24,13 @@ import java.util.List;
 public class TruthRecyclerViewAdapter extends RecyclerView.Adapter<TruthRecyclerViewAdapter.MyVerifyViewHold> {
     private List<TruthBean> truthBeanList;
     private Context context;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
-    public void setVerifyBeanList(List<TruthBean> truthBeanList,Context context) {
+    public void setmOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
+        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    }
+
+    public void setVerifyBeanList(List<TruthBean> truthBeanList, Context context) {
         this.truthBeanList = truthBeanList;
         this.context = context;
     }
@@ -48,6 +54,14 @@ public class TruthRecyclerViewAdapter extends RecyclerView.Adapter<TruthRecycler
                 Intent intent = new Intent(context, ReleaseTruthActivity.class);
                 intent.putExtra("id",truthBean.getId());//传过去后，在ReleaseTruthActivity界面通过id获取到新闻消息，从而进行更完整的显示
                 context.startActivity(intent);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int currentPosition = holder.getAdapterPosition();
+                mOnItemLongClickListener.onItemLongClick(v,currentPosition);
+                return true;
             }
         });
     }
