@@ -1,14 +1,9 @@
 package com.example.awaylie.adapter;
-
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +23,7 @@ import java.util.zip.Inflater;
 public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecyclerViewAdapter.MyVerifyViewHold> {
     private List<VerifyBean> verifyBeanList;
     private Context context;
-    private VerifyBean verifyBean;
+
     private OnItemLongClickListener mOnItemLongClickListener;
 
     public void setmOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
@@ -40,17 +35,16 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
         this.context = context;
     }
 
-
     @NonNull
     @Override
     public MyVerifyViewHold onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.release_verify_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.release_verify_item, parent, false);
         return new MyVerifyViewHold(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyVerifyViewHold holder, int position) {
-        verifyBean = verifyBeanList.get(position);//通过list获取单个的对象
+        VerifyBean verifyBean = verifyBeanList.get(position);//通过list获取单个的对象
         holder.releaseVerifyPersonName.setText(verifyBean.getName());
         holder.releaseVerifyPersonTitle.setText(verifyBean.getTitle());
         holder.releaseVerifyKeyword.setText(verifyBean.getKeyword());
@@ -59,7 +53,7 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ReleaseVerifyActivity.class);
-                intent.putExtra("id",verifyBean.getId());//传过去后，在ReleaseVerifyActivity界面通过id获取到新闻消息，从而进行更完整的显示
+                intent.putExtra("id", verifyBean.getId());//传过去后，在ReleaseVerifyActivity界面通过id获取到新闻消息，从而进行更完整的显示
                 context.startActivity(intent);
             }
         });
@@ -73,7 +67,6 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
                 return true;
             }
         });
-
     }
 
     @Override
@@ -81,10 +74,11 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
         return verifyBeanList.size();
     }
 
-    class MyVerifyViewHold extends RecyclerView.ViewHolder{
-        private TextView releaseVerifyPersonName,releaseVerifyPersonTitle;
-        private TextView releaseVerifyKeyword,releaseVerifyTime;
+    class MyVerifyViewHold extends RecyclerView.ViewHolder {
+        private TextView releaseVerifyPersonName, releaseVerifyPersonTitle;
+        private TextView releaseVerifyKeyword, releaseVerifyTime;
         private ButtonView releaseVerifyDetail;
+
         public MyVerifyViewHold(@NonNull View itemView) {
             super(itemView);
             releaseVerifyPersonName = itemView.findViewById(R.id.release_verify_person_name);
@@ -92,7 +86,6 @@ public class VerifyRecyclerViewAdapter extends RecyclerView.Adapter<VerifyRecycl
             releaseVerifyKeyword = itemView.findViewById(R.id.release_verify_keyword);
             releaseVerifyTime = itemView.findViewById(R.id.release_verify_time);
             releaseVerifyDetail = itemView.findViewById(R.id.release_verify_detail_btn);
-
 
         }
     }

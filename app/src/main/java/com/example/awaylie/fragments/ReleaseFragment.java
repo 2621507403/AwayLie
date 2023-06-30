@@ -132,6 +132,8 @@ public class ReleaseFragment extends Fragment  {
                 return fragments.size();
             }
         });
+        
+
         new TabLayoutMediator(releaseTabLayout, releaseVP, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -150,6 +152,7 @@ public class ReleaseFragment extends Fragment  {
                 }
             }
         }).attach();
+
     }
 
 }

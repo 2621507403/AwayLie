@@ -46,6 +46,7 @@ public class ReleaseVerifyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ReleaseVerifyActivity.this,ReleaseV2RActivity.class);
                 intent.putExtra("questionId",verifyBean.getId());
+
                 startActivity(intent);
             }
         });
@@ -62,7 +63,6 @@ public class ReleaseVerifyActivity extends AppCompatActivity {
     private void getData(){
         Intent intent = getIntent();
         int vId = intent.getIntExtra("id",1);
-        Log.d("Detail", "getData: "+vId);
         verifyBean = mHelper.queryByVerifyById(vId);//按照id进行查询
         releaseVerifyDetailTitle.setText(verifyBean.getTitle());
         releaseVerifyDetailName.setText(verifyBean.getName());

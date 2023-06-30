@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,9 @@ import com.lljjcoder.style.citylist.Toast.ToastUtils;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.ButtonView;
 import com.xuexiang.xui.widget.edittext.MultiLineEditText;
+import com.xuexiang.xui.widget.imageview.photoview.PhotoView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonalInfoActivity extends AppCompatActivity {
 
@@ -29,8 +34,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
     private ImageButton signatureBtn;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private CircleImageView personalHeadPic;
     private TitleBar titleBar;
-
     private String signatureText;
 
     @Override
@@ -48,6 +53,61 @@ public class PersonalInfoActivity extends AppCompatActivity {
         city = findViewById(R.id.personal_city_text);
         birth = findViewById(R.id.personal_birth_text);
         titleBar = findViewById(R.id.personal_info_title_bar);
+        personalHeadPic = findViewById(R.id.personal_head_pic);
+
+        personalHeadPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点击后弹出AlertDialog,并且弹出两个选项：查看大图和更换头像、
+                AlertDialog.Builder builder = new AlertDialog.Builder(PersonalInfoActivity.this);
+                builder.setTitle("选择操作");
+                String[] items = {"查看大图","替换头像"};
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0){
+                            //查看大图
+                            LayoutInflater inflater = getLayoutInflater();
+                            View dialogView = inflater.inflate(R.layout.header_big_pic,null);
+                            PhotoView photoView = dialogView.findViewById(R.id.personal_header_big_pic);
+                            photoView.setImageResource(R.drawable.xiaoxin);
+                            photoView.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    ToastUtils.showShortToast(PersonalInfoActivity.this,"下载图片");
+                                    return true;
+                                }
+                            });
+                            ImageButton  closeBtn = dialogView.findViewById(R.id.personal_header_pic_close);
+                            //创建一个对话框，弹出这个布局
+                            AlertDialog.Builder bigPicBuilder = new AlertDialog.Builder(PersonalInfoActivity.this);
+                            bigPicBuilder.setView(dialogView);
+                            AlertDialog alertDialog = bigPicBuilder.create();
+                            alertDialog.show();
+                            closeBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+
+                        }else {
+                            //更换头像，从相册或者系统文件中获取到图片，选择图片后进入裁剪界面，将裁剪好的图片存放入本地文件夹中，并且将路径放到数据库里
+
+
+
+
+
+
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
+
+
+
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

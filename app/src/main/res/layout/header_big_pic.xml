@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xuexiang.xui.widget.imageview.photoview.PhotoView
+        android:id="@+id/personal_header_big_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></com.xuexiang.xui.widget.imageview.photoview.PhotoView>
+    <ImageButton
+        android:id="@+id/personal_header_pic_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/close"
+        android:scaleType="fitXY"
+        android:layout_gravity="center|top"
+        ></ImageButton>
+
+</FrameLayout>
